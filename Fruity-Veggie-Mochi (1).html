@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Fruity Veggie Mochi - Healthy, Flavorful Mochi Treats</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Nunito & Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            green: '#2e7d32',
+                            lightgreen: '#e8f5e9',
+                            mango: '#ffb300',
+                            mangolight: '#fff8e1',
+                            apple: '#e53935',
+                            applelight: '#ffebee',
+                            ube: '#8e24aa',
+                            ubelight: '#f3e5f5',
+                            carrot: '#fb8c00',
+                            carrotlight: '#fff3e0',
+                            cream: '#fdfbf7',
+                            softdark: '#2c3e50'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Nunito', 'sans-serif'],
+                        heading: ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #fdfbf7;
+            color: #2c3e50;
+        }
+        .page-content {
+            display: none;
+        }
+        .page-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .mochi-bounce {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .mochi-bounce:hover {
+            transform: translateY(-4px);
+        }
+    </style>
+</head>
+<body class="bg-brand-cream text-brand-softdark min-h-screen flex flex-col justify-between">
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-emerald-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex items-center cursor-pointer" onclick="navigateTo('home')">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-emerald-500 via-amber-400 to-purple-500 flex items-center justify-center text-white text-2xl shadow-md mr-3">
+                        🍡
+                    </div>
+                    <div>
+                        <span class="font-heading text-xl font-extrabold bg-gradient-to-r from-emerald-600 to-orange-500 bg-clip-text text-transparent">Fruity Veggie Mochi</span>
+                        <p class="text-xs text-gray-500 font-medium hidden sm:block">Carcar City, Cebu</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Nav Links -->
+                <nav class="hidden md:flex space-x-1 lg:space-x-4">
+                    <button onclick="navigateTo('home')" id="nav-home" class="nav-btn px-3 py-2 rounded-lg text-sm font-bold text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition">Home</button>
+                    <button onclick="navigateTo('shop')" id="nav-shop" class="nav-btn px-3 py-2 rounded-lg text-sm font-bold text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition">Shop Mochi</button>
+                    <button onclick="navigateTo('about')" id="nav-about" class="nav-btn px-3 py-2 rounded-lg text-sm font-bold text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition">Our Story</button>
+                    <button onclick="navigateTo('catalog')" id="nav-catalog" class="nav-btn px-3 py-2 rounded-lg text-sm font-bold text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 transition">Price List</button>
+                </nav>
+
+                <!-- Cart Button & Mobile Menu Toggle -->
+                <div class="flex items-center space-x-3">
+                    <button onclick="navigateTo('cart')" class="relative bg-emerald-50 text-emerald-700 hover:bg-emerald-100 p-2.5 rounded-full font-bold transition flex items-center px-4 border border-emerald-200">
+                        <i class="fa-solid fa-cart-shopping text-lg mr-2"></i>
+                        <span class="hidden sm:inline font-heading">Cart</span>
+                        <span id="cart-badge" class="ml-2 bg-emerald-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">0</span>
+                    </button>
+
+                    <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-lg text-gray-600 hover:text-gray-900 focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-gray-200 px-4 pt-2 pb-4 space-y-1">
+            <button onclick="navigateTo('home'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-md text-base font-semibold text-gray-700 hover:bg-emerald-50">Home</button>
+            <button onclick="navigateTo('shop'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-md text-base font-semibold text-gray-700 hover:bg-emerald-50">Shop Mochi</button>
+            <button onclick="navigateTo('about'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-md text-base font-semibold text-gray-700 hover:bg-emerald-50">Our Story & Feasibility</button>
+            <button onclick="navigateTo('catalog'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-md text-base font-semibold text-gray-700 hover:bg-emerald-50">Price List Catalog</button>
+            <button onclick="navigateTo('cart'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-md text-base font-semibold text-emerald-700 hover:bg-emerald-50 font-bold">View Cart & Checkout</button>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow">
+        
+        <!-- PAGE 1: HOME -->
+        <section id="page-home" class="page-content active">
+            <!-- Hero Banner -->
+            <div class="relative bg-gradient-to-br from-emerald-600 via-emerald-500 to-teal-700 text-white overflow-hidden py-16 lg:py-24">
+                <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <span class="inline-block bg-emerald-800/60 text-amber-300 font-semibold text-xs md:text-sm px-4 py-1.5 rounded-full uppercase tracking-wider mb-4 border border-amber-300/30">
+                                📍 New Carcar City People's Park, Cebu
+                            </span>
+                            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-heading leading-tight mb-4">
+                                Healthy, Flavorful <span class="text-amber-300 underline decoration-amber-400 decoration-wavy">Mochi Treats</span>
+                            </h1>
+                            <p class="text-lg text-emerald-50 mb-8 max-w-xl font-light">
+                                "Fun, Nutrition & Innovation in Every Bite!" Crafted with fresh fruit pulps and nutrient-dense veggies wrapped in chewy rice flour goodness.
+                            </p>
+                            <div class="flex flex-wrap gap-4">
+                                <button onclick="navigateTo('shop')" class="bg-amber-400 hover:bg-amber-500 text-gray-900 font-extrabold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-0.5 flex items-center">
+                                    <i class="fa-solid fa-basket-shopping mr-2"></i> Order Fresh Mochi Now
+                                </button>
+                                <button onclick="navigateTo('about')" class="bg-white/10 hover:bg-white/20 text-white border border-white/30 font-bold px-6 py-4 rounded-xl transition">
+                                    Our Story & Feasibility
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="relative flex justify-center">
+                            <!-- Visual Mochi Showcase Graphic -->
+                            <div class="relative w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-white/10 backdrop-blur-md p-6 border border-white/20 shadow-2xl flex items-center justify-center">
+                                <div class="grid grid-cols-2 gap-4 w-full h-full p-4">
+                                    <div class="bg-amber-100/90 rounded-3xl p-4 flex flex-col items-center justify-center text-center shadow-md transform -rotate-3 hover:rotate-0 transition">
+                                        <span class="text-5xl mb-1">🥭</span>
+                                        <span class="font-bold text-xs text-amber-900">Mango Mochi</span>
+                                        <span class="text-xs font-black text-amber-700">₱25</span>
+                                    </div>
+                                    <div class="bg-rose-100/90 rounded-3xl p-4 flex flex-col items-center justify-center text-center shadow-md transform rotate-3 hover:rotate-0 transition">
+                                        <span class="text-5xl mb-1">🍎</span>
+                                        <span class="font-bold text-xs text-rose-900">Apple Mochi</span>
+                                        <span class="text-xs font-black text-rose-700">₱25</span>
+                                    </div>
+                                    <div class="bg-purple-100/90 rounded-3xl p-4 flex flex-col items-center justify-center text-center shadow-md transform rotate-2 hover:rotate-0 transition">
+                                        <span class="text-5xl mb-1">🍠</span>
+                                        <span class="font-bold text-xs text-purple-900">Sweet Purple Potato</span>
+                                        <span class="text-xs font-black text-purple-700">₱25</span>
+                                    </div>
+                                    <div class="bg-orange-100/90 rounded-3xl p-4 flex flex-col items-center justify-center text-center shadow-md transform -rotate-2 hover:rotate-0 transition">
+                                        <span class="text-5xl mb-1">🥕</span>
+                                        <span class="font-bold text-xs text-orange-900">Carrot Mochi</span>
+                                        <span class="text-xs font-black text-orange-700">₱25</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Survey Highlight Stats Section -->
+            <section class="py-12 bg-white border-b border-gray-100">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-8">
+                        <span class="text-emerald-600 font-bold text-sm tracking-widest uppercase">Backed by Research & Survey</span>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold font-heading text-gray-800">Carcar City Feasibility Highlights</h2>
+                    </div>
+
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                        <div class="p-6 bg-emerald-50 rounded-2xl border border-emerald-100">
+                            <div class="text-3xl sm:text-4xl font-extrabold text-emerald-600 mb-1">96%</div>
+                            <div class="text-xs sm:text-sm text-gray-600 font-semibold">Survey Recommendation Rate</div>
+                        </div>
+                        <div class="p-6 bg-amber-50 rounded-2xl border border-amber-100">
+                            <div class="text-3xl sm:text-4xl font-extrabold text-amber-600 mb-1">₱25</div>
+                            <div class="text-xs sm:text-sm text-gray-600 font-semibold">Affordable Base Price</div>
+                        </div>
+                        <div class="p-6 bg-purple-50 rounded-2xl border border-purple-100">
+                            <div class="text-3xl sm:text-4xl font-extrabold text-purple-600 mb-1">#1</div>
+                            <div class="text-xs sm:text-sm text-gray-600 font-semibold">Best Seller: 6-Piece Box</div>
+                        </div>
+                        <div class="p-6 bg-orange-50 rounded-2xl border border-orange-100">
+                            <div class="text-3xl sm:text-4xl font-extrabold text-orange-600 mb-1">100%</div>
+                            <div class="text-xs sm:text-sm text-gray-600 font-semibold">Natural Fruit & Veggie</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Products Teaser -->
+            <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
+                    <div>
+                        <h2 class="text-3xl font-extrabold font-heading text-gray-900">Popular Delights</h2>
+                        <p class="text-gray-600 mt-1">Hand-crafted nutritious snacks loved by students and parents in Carcar City.</p>
+                    </div>
+                    <button onclick="navigateTo('shop')" class="mt-4 md:mt-0 text-emerald-600 font-bold hover:text-emerald-700 flex items-center">
+                        View Full Menu <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="featured-products-grid">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Why Choose Us / Value Proposition -->
+            <section class="py-16 bg-gradient-to-b from-white to-emerald-50/50">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center max-w-2xl mx-auto mb-12">
+                        <h2 class="text-3xl font-extrabold font-heading text-gray-900">Why Choose Fruity Veggie Mochi?</h2>
+                        <p class="text-gray-600 mt-2">Merging health, taste, and affordability for students, families, and health-conscious foodies.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="bg-white p-8 rounded-2xl shadow-sm border border-emerald-100/60 text-center">
+                            <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-2xl mx-auto mb-4">
+                                🥗
+                            </div>
+                            <h3 class="text-xl font-bold font-heading mb-2">Real Veggies & Fruits</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Made with authentic sweet purple potato, fresh mangoes, carrots, and apples. Packed with vitamins and antioxidant benefits.
+                            </p>
+                        </div>
+
+                        <div class="bg-white p-8 rounded-2xl shadow-sm border border-emerald-100/60 text-center">
+                            <div class="w-16 h-16 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-2xl mx-auto mb-4">
+                                🎓
+                            </div>
+                            <h3 class="text-xl font-bold font-heading mb-2">Student-Friendly Prices</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Single pieces starting at just ₱25, plus special discounts and sampler bundles for school snack breaks.
+                            </p>
+                        </div>
+
+                        <div class="bg-white p-8 rounded-2xl shadow-sm border border-emerald-100/60 text-center">
+                            <div class="w-16 h-16 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-2xl mx-auto mb-4">
+                                🌿
+                            </div>
+                            <h3 class="text-xl font-bold font-heading mb-2">Eco-Friendly & Fresh</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Prepared daily with strict hygiene standards and served in biodegradable/recyclable eco packaging at People's Park.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <!-- PAGE 2: SHOP / PRODUCTS -->
+        <section id="page-shop" class="page-content py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-8">
+                <h1 class="text-3xl sm:text-4xl font-extrabold font-heading text-gray-900">Explore Our Mochi Menu</h1>
+                <p class="text-gray-600 mt-2">Choose single bites or family box bundles packed fresh daily at our Carcar City food cart.</p>
+            </div>
+
+            <!-- Filters & Search -->
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-8 bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+                <!-- Categories -->
+                <div class="flex flex-wrap gap-2 w-full md:w-auto" id="category-filters">
+                    <button onclick="filterProducts('all')" class="cat-btn bg-emerald-600 text-white px-4 py-2 rounded-xl font-bold text-sm transition">All Items</button>
+                    <button onclick="filterProducts('single')" class="cat-btn bg-gray-100 text-gray-600 hover:bg-gray-200 px-4 py-2 rounded-xl font-bold text-sm transition">Single Bites (₱25)</button>
+                    <button onclick="filterProducts('box')" class="cat-btn bg-gray-100 text-gray-600 hover:bg-gray-200 px-4 py-2 rounded-xl font-bold text-sm transition">Bundles & Boxes</button>
+                    <button onclick="filterProducts('promo')" class="cat-btn bg-gray-100 text-gray-600 hover:bg-gray-200 px-4 py-2 rounded-xl font-bold text-sm transition">Special Promos</button>
+                </div>
+
+                <!-- Search input -->
+                <div class="relative w-full md:w-64">
+                    <input type="text" id="product-search" onkeyup="searchProducts()" placeholder="Search flavor or pack..." class="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-gray-400 text-sm"></i>
+                </div>
+            </div>
+
+            <!-- Product Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="products-grid">
+                <!-- Populated dynamically via JS -->
+            </div>
+        </section>
+
+        <!-- PAGE 3: ABOUT / OUR STORY -->
+        <section id="page-about" class="page-content py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Story Header -->
+            <div class="bg-gradient-to-r from-emerald-600 to-teal-700 rounded-3xl p-8 sm:p-12 text-white mb-12 shadow-lg relative overflow-hidden">
+                <div class="max-w-2xl">
+                    <span class="bg-amber-400 text-gray-900 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">BSOA Final Feasibility Project</span>
+                    <h1 class="text-3xl sm:text-5xl font-extrabold font-heading mt-3 mb-4">Our Journey & Story</h1>
+                    <p class="text-emerald-100 leading-relaxed text-base sm:text-lg">
+                        "Fruity Veggie Mochi" was established as an innovative business model targeting health-conscious snack lovers in Carcar City. By combining traditional chewy mochi with vegetable and fruit nutrients, we offer a guilt-free indulgence for everyone!
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <!-- Mission -->
+                <div class="bg-white p-8 rounded-2xl border border-emerald-100 shadow-sm">
+                    <div class="w-12 h-12 bg-emerald-100 text-emerald-700 rounded-xl flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-bullseye"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold font-heading mb-3">Our Mission</h2>
+                    <p class="text-gray-600 leading-relaxed">
+                        To provide nutritious, delicious, and affordable fruit-and-vegetable infused mochi snacks to students, families, and professionals in Carcar City, promoting a healthy lifestyle without compromising on fun and flavor.
+                    </p>
+                </div>
+
+                <!-- Vision -->
+                <div class="bg-white p-8 rounded-2xl border border-emerald-100 shadow-sm">
+                    <div class="w-12 h-12 bg-amber-100 text-amber-700 rounded-xl flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-eye"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold font-heading mb-3">Our Vision</h2>
+                    <p class="text-gray-600 leading-relaxed">
+                        To become the premier healthy food cart brand in Carcar City and expanded Cebu municipalities, recognized for product innovation, sustainability, and quality customer satisfaction.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Business Structure & Partners -->
+            <div class="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm mb-12">
+                <h2 class="text-2xl font-bold font-heading text-gray-900 mb-2">General Partnership Structure</h2>
+                <p class="text-gray-600 mb-6 text-sm">Managed collaboratively by four passionate BSOA student entrepreneurs behind the feasibility study.</p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="p-5 bg-gray-50 rounded-2xl border border-gray-200/60 text-center">
+                        <div class="w-16 h-16 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-3 shadow">
+                            H
+                        </div>
+                        <h3 class="font-bold text-gray-900 font-heading">Hyacenth Aleguiojo</h3>
+                        <p class="text-xs text-emerald-600 font-semibold mt-1">General Manager</p>
+                    </div>
+
+                    <div class="p-5 bg-gray-50 rounded-2xl border border-gray-200/60 text-center">
+                        <div class="w-16 h-16 bg-amber-500 text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-3 shadow">
+                            B
+                        </div>
+                        <h3 class="font-bold text-gray-900 font-heading">Bliss Virgen Mea Baylosis</h3>
+                        <p class="text-xs text-amber-600 font-semibold mt-1">Operations Lead</p>
+                    </div>
+
+                    <div class="p-5 bg-gray-50 rounded-2xl border border-gray-200/60 text-center">
+                        <div class="w-16 h-16 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-3 shadow">
+                            M
+                        </div>
+                        <h3 class="font-bold text-gray-900 font-heading">Mariska Belethy Jen Emnacen</h3>
+                        <p class="text-xs text-purple-600 font-semibold mt-1">Finance & Marketing</p>
+                    </div>
+
+                    <div class="p-5 bg-gray-50 rounded-2xl border border-gray-200/60 text-center">
+                        <div class="w-16 h-16 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-3 shadow">
+                            E
+                        </div>
+                        <h3 class="font-bold text-gray-900 font-heading">Edwin Mapiscay Jr.</h3>
+                        <p class="text-xs text-orange-600 font-semibold mt-1">Quality & Distribution</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Location & Operations Details -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 bg-emerald-50 p-8 rounded-3xl border border-emerald-100">
+                    <h3 class="text-xl font-bold font-heading text-emerald-900 mb-3">📍 Location & Setup</h3>
+                    <p class="text-emerald-800 text-sm leading-relaxed mb-4">
+                        Our primary physical food cart is stationed at the <strong>New Carcar City People's Park, Carcar City, Cebu</strong>. This prime location grants foot traffic from students, families, park visitors, and local commuters.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-semibold text-emerald-900">
+                        <div class="bg-white p-3 rounded-xl border border-emerald-200">
+                            <i class="fa-solid fa-clock text-emerald-600 mr-2"></i> Peak Hours: 3:00 PM - 8:00 PM
+                        </div>
+                        <div class="bg-white p-3 rounded-xl border border-emerald-200">
+                            <i class="fa-solid fa-box text-emerald-600 mr-2"></i> Eco Packaging: Biodegradable boxes
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-amber-50 p-8 rounded-3xl border border-amber-100 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold font-heading text-amber-900 mb-3">🌱 Health Benefits</h3>
+                        <p class="text-amber-800 text-sm leading-relaxed">
+                            Rich in Vitamin A (Carrots), Vitamin C (Mangoes & Apple), and Fiber & Antioxidants (Sweet Purple Potato).
+                        </p>
+                    </div>
+                    <button onclick="navigateTo('shop')" class="mt-6 w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 rounded-xl text-sm transition">
+                        Order Fresh Mochi
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 4: CATALOG / PRICE LIST TABLE -->
+        <section id="page-catalog" class="page-content py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <h1 class="text-3xl sm:text-4xl font-extrabold font-heading text-gray-900">Official Price Catalog</h1>
+                <p class="text-gray-600 mt-2">Comprehensive price breakdown, package sizing, and base flavor specifications.</p>
+            </div>
+
+            <!-- Responsive Table Container -->
+            <div class="bg-white rounded-3xl shadow-sm border border-gray-200 overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-emerald-600 text-white font-heading text-sm">
+                                <th class="p-4 sm:p-5">Product Name</th>
+                                <th class="p-4 sm:p-5">Flavor Base</th>
+                                <th class="p-4 sm:p-5">Size / Quantity</th>
+                                <th class="p-4 sm:p-5">Packaging Type</th>
+                                <th class="p-4 sm:p-5">Price</th>
+                                <th class="p-4 sm:p-5 text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100 text-sm font-medium" id="catalog-table-body">
+                            <!-- Populated via JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Pricing Notes -->
+            <div class="mt-6 bg-emerald-50 rounded-2xl p-4 border border-emerald-100 flex items-start space-x-3 text-xs sm:text-sm text-emerald-800">
+                <i class="fa-solid fa-circle-info text-emerald-600 text-lg mt-0.5"></i>
+                <div>
+                    <strong>Feasibility Note:</strong> All prices are in Philippine Pesos (₱). Student discount (10% OFF) can be claimed using the code <span class="font-mono font-bold bg-white px-2 py-0.5 rounded border border-emerald-200">STUDENT10</span> at checkout!
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 5: CART & CHECKOUT -->
+        <section id="page-cart" class="page-content py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-3xl font-extrabold font-heading text-gray-900 mb-8">Your Shopping Cart</h1>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Cart Items List -->
+                <div class="lg:col-span-2">
+                    <div id="cart-empty-message" class="hidden bg-white p-12 rounded-3xl border border-gray-100 text-center">
+                        <span class="text-6xl mb-4 block">🍡</span>
+                        <h3 class="text-xl font-bold font-heading text-gray-800 mb-2">Your Cart is Empty</h3>
+                        <p class="text-gray-500 mb-6">Looks like you haven't added any fresh mochi treats yet.</p>
+                        <button onclick="navigateTo('shop')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3 rounded-xl transition">
+                            Browse Mochi Menu
+                        </button>
+                    </div>
+
+                    <div id="cart-items-container" class="space-y-4">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+                </div>
+
+                <!-- Order Summary & Checkout Form -->
+                <div class="bg-white p-6 sm:p-8 rounded-3xl border border-gray-200 shadow-sm h-fit">
+                    <h2 class="text-xl font-bold font-heading text-gray-900 mb-4 border-b border-gray-100 pb-3">Order Summary</h2>
+
+                    <!-- Cost Calculations -->
+                    <div class="space-y-3 text-sm mb-6">
+                        <div class="flex justify-between text-gray-600">
+                            <span>Subtotal</span>
+                            <span class="font-bold text-gray-800" id="cart-subtotal">₱0.00</span>
+                        </div>
+                        <div class="flex justify-between text-emerald-600 font-semibold" id="discount-row" style="display: none;">
+                            <span>Discount</span>
+                            <span id="cart-discount">-₱0.00</span>
+                        </div>
+                        <div class="flex justify-between text-gray-600">
+                            <span>Pickup / Delivery</span>
+                            <span class="font-bold text-emerald-600">FREE (Park Stall)</span>
+                        </div>
+                        <div class="border-t border-gray-100 pt-3 flex justify-between text-lg font-extrabold text-gray-900">
+                            <span>Total</span>
+                            <span class="text-emerald-600" id="cart-total">₱0.00</span>
+                        </div>
+                    </div>
+
+                    <!-- Promo Code Input -->
+                    <div class="mb-6">
+                        <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Promo Code / Coupon</label>
+                        <div class="flex space-x-2">
+                            <input type="text" id="coupon-input" placeholder="e.g. STUDENT10" class="uppercase flex-grow px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                            <button onclick="applyCoupon()" class="bg-gray-800 hover:bg-gray-900 text-white px-4 py-2 rounded-xl text-sm font-bold transition">Apply</button>
+                        </div>
+                        <p id="coupon-msg" class="text-xs mt-1.5 font-semibold hidden"></p>
+                    </div>
+
+                    <!-- Checkout Form -->
+                    <form id="checkout-form" onsubmit="handleCheckout(event)" class="space-y-4 border-t border-gray-100 pt-6">
+                        <h3 class="font-bold font-heading text-gray-900 text-sm">Customer Details</h3>
+                        
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-600 mb-1">Full Name *</label>
+                            <input type="text" id="cust-name" required placeholder="e.g. Maria Santos" class="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-600 mb-1">Contact Phone Number *</label>
+                            <input type="tel" id="cust-phone" required placeholder="09XX XXX XXXX" class="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-600 mb-1">Fulfillment Option</label>
+                            <select id="cust-fulfillment" class="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                <option value="Park Stall Pickup">Stall Pickup (New Carcar City People's Park)</option>
+                                <option value="Carcar Local Delivery">Local Carcar Delivery (+₱20)</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-600 mb-1">Payment Method</label>
+                            <select id="cust-payment" class="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                <option value="Cash on Pick-up/Delivery">Cash on Pick-up / Delivery</option>
+                                <option value="GCash">GCash Payment</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" id="checkout-btn" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold py-3.5 rounded-xl text-base shadow-lg hover:shadow-xl transition mt-4">
+                            Place Order Now 🍡
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Order Success Modal -->
+    <div id="order-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 text-center shadow-2xl border border-emerald-100 transform transition-all">
+            <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-3xl mx-auto mb-4">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <h3 class="text-2xl font-extrabold font-heading text-gray-900 mb-2">Order Confirmed!</h3>
+            <p class="text-gray-600 text-sm mb-6">Thank you for supporting <strong>Fruity Veggie Mochi</strong>! Your order has been placed successfully.</p>
+            
+            <div class="bg-emerald-50 p-4 rounded-2xl text-left text-xs text-emerald-900 space-y-2 mb-6 border border-emerald-100">
+                <div><strong>Order Reference:</strong> <span id="modal-ref-id" class="font-mono text-emerald-700 font-bold">FVM-8492</span></div>
+                <div><strong>Customer:</strong> <span id="modal-cust-name">Maria Santos</span></div>
+                <div><strong>Fulfillment:</strong> <span id="modal-fulfillment">Park Stall Pickup</span></div>
+                <div><strong>Total Amount:</strong> <span id="modal-total-price" class="font-bold text-emerald-700">₱140.00</span></div>
+            </div>
+
+            <button onclick="closeModal()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition">
+                Back to Home Page
+            </button>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-gray-900 text-white px-5 py-3 rounded-2xl shadow-2xl flex items-center space-x-3 transform translate-y-20 opacity-0 transition-all duration-300 z-50">
+        <span id="toast-icon">✨</span>
+        <span id="toast-message" class="text-sm font-semibold">Item added to cart!</span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 mt-20 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-2 mb-3">
+                        <span class="text-2xl">🍡</span>
+                        <span class="font-heading font-extrabold text-xl text-white">Fruity Veggie Mochi</span>
+                    </div>
+                    <p class="text-xs text-gray-400 max-w-sm leading-relaxed mb-4">
+                        Healthy, Flavorful Mochi Treats - Fun, Nutrition & Innovation in Every Bite.
+                    </p>
+                    <p class="text-xs text-emerald-400 font-semibold">
+                        📍 New Carcar City People's Park, Carcar City, Cebu
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold font-heading text-sm mb-3">Quick Navigation</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#" onclick="navigateTo('home'); return false;" class="hover:text-amber-400">Home</a></li>
+                        <li><a href="#" onclick="navigateTo('shop'); return false;" class="hover:text-amber-400">Shop Products</a></li>
+                        <li><a href="#" onclick="navigateTo('about'); return false;" class="hover:text-amber-400">Our Feasibility Story</a></li>
+                        <li><a href="#" onclick="navigateTo('catalog'); return false;" class="hover:text-amber-400">Price List Table</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold font-heading text-sm mb-3">Partnership Team</h4>
+                    <ul class="space-y-1.5 text-xs text-gray-400">
+                        <li>Hyacenth Aleguiojo</li>
+                        <li>Bliss Virgen Mea Baylosis</li>
+                        <li>Mariska Belethy Jen Emnacen</li>
+                        <li>Edwin Mapiscay Jr.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-6 text-center text-xs text-gray-500">
+                © 2026 Fruity Veggie Mochi. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Products Master Data based on Study
+        const productsData = [
+            {
+                id: 'm1',
+                name: 'Mango Mochi',
+                category: 'single',
+                flavor: 'Mango Base',
+                size: 'Single Piece (~35g)',
+                packaging: 'Individual Wrap',
+                price: 25,
+                color: 'bg-amber-100 text-amber-900 border-amber-200',
+                btnColor: 'bg-amber-500 hover:bg-amber-600',
+                emoji: '🥭',
+                desc: 'Sweet ripe Cebu mango flavor blended into chewy gluten-free rice flour.'
+            },
+            {
+                id: 'm2',
+                name: 'Apple Mochi',
+                category: 'single',
+                flavor: 'Apple Base',
+                size: 'Single Piece (~35g)',
+                packaging: 'Individual Wrap',
+                price: 25,
+                color: 'bg-rose-100 text-rose-900 border-rose-200',
+                btnColor: 'bg-rose-500 hover:bg-rose-600',
+                emoji: '🍎',
+                desc: 'Refreshing sweet-apple infused mochi with vitamin C richness.'
+            },
+            {
+                id: 'm3',
+                name: 'Sweet Purple Potato Mochi',
+                category: 'single',
+                flavor: 'Ube / Purple Potato',
+                size: 'Single Piece (~35g)',
+                packaging: 'Individual Wrap',
+                price: 25,
+                color: 'bg-purple-100 text-purple-900 border-purple-200',
+                btnColor: 'bg-purple-600 hover:bg-purple-700',
+                emoji: '🍠',
+                desc: 'Rich purple sweet potato loaded with dietary fiber and antioxidants.'
+            },
+            {
+                id: 'm4',
+                name: 'Carrot Mochi',
+                category: 'single',
+                flavor: 'Carrot Base',
+                size: 'Single Piece (~35g)',
+                packaging: 'Individual Wrap',
+                price: 25,
+                color: 'bg-orange-100 text-orange-900 border-orange-200',
+                btnColor: 'bg-orange-500 hover:bg-orange-600',
+                emoji: '🥕',
+                desc: 'Nutritious fresh carrot extract naturally sweetened with rice dough.'
+            },
+            {
+                id: 'm5',
+                name: 'Sampler 4-Pack Box',
+                category: 'box',
+                flavor: '1 of Each Flavor',
+                size: '4 Pieces Box',
+                packaging: 'Eco Kraft Box',
+                price: 95,
+                color: 'bg-emerald-100 text-emerald-900 border-emerald-200',
+                btnColor: 'bg-emerald-600 hover:bg-emerald-700',
+                emoji: '📦',
+                desc: 'Includes 1 Mango, 1 Apple, 1 Sweet Purple Potato, and 1 Carrot Mochi.'
+            },
+            {
+                id: 'm6',
+                name: 'Family Delight 6-Piece Box',
+                category: 'box',
+                flavor: 'Assorted Favorites',
+                size: '6 Pieces Box',
+                packaging: 'Eco Box + Ribbon',
+                price: 140,
+                color: 'bg-amber-100 text-amber-900 border-amber-300',
+                btnColor: 'bg-amber-600 hover:bg-amber-700',
+                badge: 'BEST SELLER',
+                emoji: '🎁',
+                desc: 'Most popular bundle in our Carcar market study! Mix and match flavors.'
+            },
+            {
+                id: 'm7',
+                name: 'Party Fiesta 12-Piece Box',
+                category: 'box',
+                flavor: 'All Flavors Variety',
+                size: '12 Pieces Box',
+                packaging: 'Party Presentation Box',
+                price: 270,
+                color: 'bg-teal-100 text-teal-900 border-teal-200',
+                btnColor: 'bg-teal-600 hover:bg-teal-700',
+                emoji: '🎉',
+                desc: 'Perfect for celebrations, meetings, and family park outings.'
+            },
+            {
+                id: 'm8',
+                name: 'Student Delight Pack',
+                category: 'promo',
+                flavor: 'Choice of 6 Pieces',
+                size: 'Buy 5 Get 1 FREE',
+                packaging: 'Eco Snack Pouch',
+                price: 125,
+                color: 'bg-blue-100 text-blue-900 border-blue-200',
+                btnColor: 'bg-blue-600 hover:bg-blue-700',
+                badge: 'STUDENT PROMO',
+                emoji: '🎓',
+                desc: 'Buy 5 mochi pieces and get 1 free! Designed for students in Carcar.'
+            }
+        ];
+
+        // In-Memory Shopping Cart State
+        let cart = [];
+        let appliedDiscount = 0; // percentage e.g. 0.10 for 10%
+
+        // Initialize Page
+        window.addEventListener('DOMContentLoaded', () => {
+            renderFeaturedProducts();
+            renderProducts(productsData);
+            renderCatalogTable();
+            updateCartUI();
+        });
+
+        // Navigation Controller
+        function navigateTo(pageId) {
+            document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
+            const target = document.getElementById(`page-${pageId}`);
+            if (target) {
+                target.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            // Update Nav active styling
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('text-emerald-600', 'bg-emerald-50');
+            });
+            const activeNav = document.getElementById(`nav-${pageId}`);
+            if (activeNav) {
+                activeNav.classList.add('text-emerald-600', 'bg-emerald-50');
+            }
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Render Featured Products (Home Page)
+        function renderFeaturedProducts() {
+            const featured = productsData.filter(p => p.id === 'm1' || p.id === 'm3' || p.id === 'm6' || p.id === 'm8');
+            const container = document.getElementById('featured-products-grid');
+            container.innerHTML = featured.map(p => createProductCardHTML(p)).join('');
+        }
+
+        // Render Shop Products Grid
+        function renderProducts(items) {
+            const container = document.getElementById('products-grid');
+            if (items.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full text-center py-12 text-gray-500">
+                        No mochi items match your search filter.
+                    </div>
+                `;
+                return;
+            }
+            container.innerHTML = items.map(p => createProductCardHTML(p)).join('');
+        }
+
+        // Generate Product Card HTML
+        function createProductCardHTML(product) {
+            return `
+                <div class="bg-white rounded-3xl p-5 border border-gray-100 shadow-sm hover:shadow-md transition mochi-bounce flex flex-col justify-between relative">
+                    ${product.badge ? `<span class="absolute top-4 right-4 bg-amber-400 text-gray-900 font-extrabold text-[10px] px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm">${product.badge}</span>` : ''}
+                    
+                    <div>
+                        <div class="w-full h-36 ${product.color} rounded-2xl flex items-center justify-center text-6xl mb-4 border shadow-inner">
+                            ${product.emoji}
+                        </div>
+                        <h3 class="font-bold font-heading text-gray-900 text-lg leading-snug">${product.name}</h3>
+                        <p class="text-xs text-gray-500 mt-1 mb-2">${product.flavor} • ${product.size}</p>
+                        <p class="text-xs text-gray-600 line-clamp-2 leading-relaxed">${product.desc}</p>
+                    </div>
+
+                    <div class="mt-5 pt-4 border-t border-gray-100 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-gray-400 block font-medium">Price</span>
+                            <span class="text-xl font-extrabold text-emerald-600">₱${product.price}</span>
+                        </div>
+                        <button onclick="addToCart('${product.id}')" class="${product.btnColor} text-white font-bold px-4 py-2.5 rounded-xl text-xs flex items-center transition shadow-sm hover:shadow">
+                            <i class="fa-solid fa-plus mr-1.5"></i> Add
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Render Catalog Table (Page 4)
+        function renderCatalogTable() {
+            const tbody = document.getElementById('catalog-table-body');
+            tbody.innerHTML = productsData.map((p, index) => `
+                <tr class="${index % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'} hover:bg-emerald-50/40 transition">
+                    <td class="p-4 font-bold text-gray-900 flex items-center space-x-2">
+                        <span class="text-xl">${p.emoji}</span>
+                        <span>${p.name}</span>
+                    </td>
+                    <td class="p-4 text-gray-600">${p.flavor}</td>
+                    <td class="p-4 text-gray-600">${p.size}</td>
+                    <td class="p-4 text-gray-600">${p.packaging}</td>
+                    <td class="p-4 font-extrabold text-emerald-600">₱${p.price}.00</td>
+                    <td class="p-4 text-center">
+                        <button onclick="addToCart('${p.id}'); navigateTo('cart');" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition">
+                            Order Now
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Filter Products by Category
+        function filterProducts(category) {
+            // Update filter button styling
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.classList.remove('bg-emerald-600', 'text-white');
+                btn.classList.add('bg-gray-100', 'text-gray-600');
+            });
+            event.target.classList.remove('bg-gray-100', 'text-gray-600');
+            event.target.classList.add('bg-emerald-600', 'text-white');
+
+            if (category === 'all') {
+                renderProducts(productsData);
+            } else {
+                const filtered = productsData.filter(p => p.category === category);
+                renderProducts(filtered);
+            }
+        }
+
+        // Search Products Input
+        function searchProducts() {
+            const query = document.getElementById('product-search').value.toLowerCase();
+            const filtered = productsData.filter(p => 
+                p.name.toLowerCase().includes(query) || 
+                p.flavor.toLowerCase().includes(query) || 
+                p.desc.toLowerCase().includes(query)
+            );
+            renderProducts(filtered);
+        }
+
+        // Cart Actions
+        function addToCart(productId) {
+            const existing = cart.find(item => item.id === productId);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                const product = productsData.find(p => p.id === productId);
+                cart.push({ ...product, qty: 1 });
+            }
+            updateCartUI();
+            showToast(`Added ${productsData.find(p => p.id === productId).name} to cart!`, '🍡');
+        }
+
+        function updateQty(productId, change) {
+            const item = cart.find(i => i.id === productId);
+            if (!item) return;
+            item.qty += change;
+            if (item.qty <= 0) {
+                cart = cart.filter(i => i.id !== productId);
+            }
+            updateCartUI();
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(i => i.id !== productId);
+            updateCartUI();
+            showToast('Item removed from cart', '🗑️');
+        }
+
+        function applyCoupon() {
+            const code = document.getElementById('coupon-input').value.trim().toUpperCase();
+            const msg = document.getElementById('coupon-msg');
+
+            if (code === 'STUDENT10') {
+                appliedDiscount = 0.10; // 10% OFF
+                msg.textContent = '🎉 10% Student Discount Applied!';
+                msg.className = 'text-xs mt-1.5 font-semibold text-emerald-600 block';
+            } else if (code === 'BUY5GET1') {
+                appliedDiscount = 0.15; // 15% promo discount
+                msg.textContent = '🎉 Buy 5 Get 1 Promo Discount Applied!';
+                msg.className = 'text-xs mt-1.5 font-semibold text-emerald-600 block';
+            } else if (code === '') {
+                msg.textContent = 'Please enter a coupon code.';
+                msg.className = 'text-xs mt-1.5 font-semibold text-rose-500 block';
+            } else {
+                appliedDiscount = 0;
+                msg.textContent = 'Invalid promo code. Try "STUDENT10"';
+                msg.className = 'text-xs mt-1.5 font-semibold text-rose-500 block';
+            }
+            updateCartUI();
+        }
+
+        // Update Cart UI & Calculator
+        function updateCartUI() {
+            const badge = document.getElementById('cart-badge');
+            const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+            badge.textContent = totalCount;
+
+            const container = document.getElementById('cart-items-container');
+            const emptyMsg = document.getElementById('cart-empty-message');
+
+            if (cart.length === 0) {
+                emptyMsg.classList.remove('hidden');
+                container.innerHTML = '';
+            } else {
+                emptyMsg.classList.add('hidden');
+                container.innerHTML = cart.map(item => `
+                    <div class="bg-white p-4 sm:p-5 rounded-2xl border border-gray-100 shadow-sm flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 ${item.color} rounded-xl flex items-center justify-center text-2xl border">
+                                ${item.emoji}
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 font-heading text-sm sm:text-base">${item.name}</h4>
+                                <p class="text-xs text-gray-500">₱${item.price} each</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center space-x-3">
+                            <div class="flex items-center border border-gray-200 rounded-xl bg-gray-50">
+                                <button onclick="updateQty('${item.id}', -1)" class="px-2.5 py-1 text-gray-600 hover:text-black font-bold text-sm">-</button>
+                                <span class="px-3 text-sm font-bold text-gray-800">${item.qty}</span>
+                                <button onclick="updateQty('${item.id}', 1)" class="px-2.5 py-1 text-gray-600 hover:text-black font-bold text-sm">+</button>
+                            </div>
+                            <span class="font-extrabold text-gray-900 text-sm w-16 text-right">₱${item.price * item.qty}</span>
+                            <button onclick="removeFromCart('${item.id}')" class="text-gray-400 hover:text-rose-500 p-1">
+                                <i class="fa-solid fa-trash-can text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Calculation
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const discountAmount = subtotal * appliedDiscount;
+            const finalTotal = subtotal - discountAmount;
+
+            document.getElementById('cart-subtotal').textContent = `₱${subtotal.toFixed(2)}`;
+            
+            const discountRow = document.getElementById('discount-row');
+            if (appliedDiscount > 0) {
+                discountRow.style.display = 'flex';
+                document.getElementById('cart-discount').textContent = `-₱${discountAmount.toFixed(2)}`;
+            } else {
+                discountRow.style.display = 'none';
+            }
+
+            document.getElementById('cart-total').textContent = `₱${finalTotal.toFixed(2)}`;
+        }
+
+        // Form Checkout Handler
+        function handleCheckout(event) {
+            event.preventDefault();
+
+            if (cart.length === 0) {
+                showToast('Your cart is empty! Add items before checkout.', '⚠️');
+                return;
+            }
+
+            const name = document.getElementById('cust-name').value;
+            const fulfillment = document.getElementById('cust-fulfillment').value;
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const total = subtotal - (subtotal * appliedDiscount);
+
+            // Populate Modal
+            document.getElementById('modal-ref-id').textContent = 'FVM-' + Math.floor(1000 + Math.random() * 9000);
+            document.getElementById('modal-cust-name').textContent = name;
+            document.getElementById('modal-fulfillment').textContent = fulfillment;
+            document.getElementById('modal-total-price').textContent = `₱${total.toFixed(2)}`;
+
+            // Show Modal
+            document.getElementById('order-modal').classList.remove('hidden');
+
+            // Reset Cart
+            cart = [];
+            appliedDiscount = 0;
+            document.getElementById('coupon-input').value = '';
+            document.getElementById('coupon-msg').classList.add('hidden');
+            document.getElementById('checkout-form').reset();
+            updateCartUI();
+        }
+
+        function closeModal() {
+            document.getElementById('order-modal').classList.add('hidden');
+            navigateTo('home');
+        }
+
+        // Toast Notification System
+        function showToast(message, icon = '✨') {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').textContent = message;
+            document.getElementById('toast-icon').textContent = icon;
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 2800);
+        }
+    </script>
+</body>
+</html>
